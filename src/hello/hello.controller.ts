@@ -1,6 +1,8 @@
 import express from "express";
 import fs from "fs";
 
+import { schema } from "./hello.schemas";
+
 export default {
   hello(request: express.Request, response: express.Response) {
     response.send("Hello World 3");
@@ -12,5 +14,9 @@ export default {
       console.log("File created");
     });
     response.send("ok");
+  },
+
+  validate(request: express.Request, response: express.Response) {
+    response.send(schema.parse(request.body));
   },
 };
