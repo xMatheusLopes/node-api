@@ -1,7 +1,7 @@
 import * as express from "express";
-import hello from "./user/user.routing";
+import hello from "./user.controller";
 
 const router = express.Router();
-router.use(hello);
+router.route("/user").post(hello.store);
 
 export default router;
