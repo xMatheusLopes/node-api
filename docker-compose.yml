@@ -14,9 +14,7 @@ services:
     networks:
       - api
   node_api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - 8080:8080
     volumes:
