@@ -8,7 +8,16 @@ export default {
   async store(request: express.Request, response: express.Response) {
     const connection = await createConnection();
     const userRepository = connection.getRepository(User);
-    await userRepository.save(request.body);
-    response.send("ok");
+    const user = await userRepository.save(request.body);
+    connection.close();
+    response.send(user);
   },
+
+  async listAll(request: express.Request, response: express.Response) {
+    const connection = await createConnection();
+    const userRepository = connection.getRepository(User);
+    const users = await userRepository.find();
+    connection.close();
+    response.send(users);
+  }
 };

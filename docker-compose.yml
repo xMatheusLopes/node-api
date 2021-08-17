@@ -14,15 +14,18 @@ services:
     networks:
       - api
   node_api:
-    image: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
+    volumes:
+      - ./src:/app/src
     depends_on:
       - mysql
     networks:
       - api
-    command: bash -c "ts-node src/app.ts"
+    command: bash -c "npm run dev"
 networks:
   api:
-    name: api
     driver: bridge
