@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon",
     "test": "jest --coverage",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "build": "tsc --build"
   },
   "author": "",
   "license": "ISC",
