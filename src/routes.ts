@@ -1,7 +1,9 @@
 import * as express from "express";
-import hello from "./user/user.routing";
+import user from "./user/user.routing";
+import liveness from "./liveness/liveness.routing";
 
 const router = express.Router();
-router.use(hello);
+router.use(user);
+router.use(liveness);
 
 export default router;

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: node-api
+  name: node-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: node-api
+    spec:
+      containers:
+      - args:
+        - bash
+        - -c
+        - npm run dev
+        image: xmatheuslopes/node-api:0.0.2
+        imagePullPolicy: ""
+        name: node-api
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: api/v1/health/liveness
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 20
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
