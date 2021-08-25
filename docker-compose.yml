@@ -14,7 +14,7 @@ services:
     networks:
       - api
   node_api:
-    build: .
+    image: xmatheuslopes/node-api:0.0.1
     ports:
       - 8080:8080
     volumes:

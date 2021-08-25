@@ -4,14 +4,14 @@ import * as fs from "fs";
 import { createConnection } from "typeorm";
 import { User } from "../entity/User";
 
-export default {
+class UserController {
   async store(request: express.Request, response: express.Response) {
     const connection = await createConnection();
     const userRepository = connection.getRepository(User);
     const user = await userRepository.save(request.body);
     connection.close();
     response.send(user);
-  },
+  }
 
   async listAll(request: express.Request, response: express.Response) {
     const connection = await createConnection();
@@ -20,4 +20,6 @@ export default {
     connection.close();
     response.send(users);
   }
-};
+}
+
+export default UserController;

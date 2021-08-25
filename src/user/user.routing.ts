@@ -1,7 +1,9 @@
 import * as express from "express";
-import hello from "./user.controller";
+import UserController from './user.controller'
 
 const router = express.Router();
-router.route("/user").post(hello.store).get(hello.listAll);
+
+const userController = new UserController();
+router.route("/user").post(userController.store).get(userController.listAll);
 
 export default router;

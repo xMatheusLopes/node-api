@@ -12,4 +12,4 @@ createConnection()
   });
 
 server.listen(8080, "0.0.0.0");
-console.log("Server listening on port 8001");
+console.log("Server listening on port 8080");
