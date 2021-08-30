@@ -16,13 +16,14 @@ spec:
       labels:
         app: node-api
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
       - args:
         - bash
         - -c
         - npm run dev
         image: xmatheuslopes/node-api:0.0.2
-        imagePullPolicy: ""
+        imagePullPolicy: "Always"
         name: node-api
         ports:
         - containerPort: 8080
