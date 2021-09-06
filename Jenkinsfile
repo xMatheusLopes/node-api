@@ -1,5 +1,7 @@
 pipeline {
-    agent { label 'master' }
+    agent {
+        docker 'circleci/node:9.3-stretch-browsers'
+    }
     stages {
         stage('Build') {
             steps {
