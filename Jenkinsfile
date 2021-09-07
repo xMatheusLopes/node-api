@@ -1,26 +1,9 @@
 pipeline {
-    agent any
+    agent { docker { image 'node:14-alpine' } }
     stages {
-        stage('Building image') {
+        stage('build') {
             steps {
-                script { 
-                    dockerImage = docker.build node-api
-                }
-            }
-        }
-        stage('Deploy Image') {
-            steps{
-                script {
-                    docker.withRegistry('', 'docker-cred') {
-                        dockerImage.push("$BUILD_NUMBER")
-                        dockerImage.push('latest')
-                    }
-                }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'kubectl set image deployment/node-api node-api=xmatheuslopes/node-api:0.0.3'
+                sh 'npm --version'
             }
         }
     }
