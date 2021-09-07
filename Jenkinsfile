@@ -1,13 +1,16 @@
 pipeline {
     agent any
     stages {
+        stage('Build') {
+            steps {
+                sh "docker build . -t xmatheuslopes/node-api:0.0.3"
+                sh "docker login -u xmatheuslopes -p Timaomhl1996*"
+                sh "docker push xmatheuslopes/node-api:0.0.3"
+            }
+        }
         stage('Deploy') {
             steps {
-                withKubeConfig([credentialsId: 'kubernetes']) {
-                    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-                    sh 'chmod u+x ./kubectl'  
-                    sh './kubectl set image deployment/node-api node-api=xmatheuslopes/node-api:0.0.3'
-                }
+                sh 'kubectl set image deployment/node-api node-api=xmatheuslopes/node-api:0.0.3'
             }
         }
     }
