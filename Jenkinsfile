@@ -1,12 +1,15 @@
 pipeline {
-    agent {
-        docker 'circleci/node:9.3-stretch-browsers'
+    agent any
+    tools {
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
+    }
+    environment {
+        DOCKER_CERT_PATH = credentials('docker-cred')
     }
     stages {
         stage('Build') {
             steps {
                 sh 'docker build . -t xmatheuslopes/node-api:0.0.3'
-                sh 'docker login -u xmatheuslopes -p Timaomhl1996*'
                 sh 'docker push xmatheuslopes/node-api:0.0.3'
             }
         }
