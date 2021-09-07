@@ -2,8 +2,11 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            docker.withRegistry('https://hub.docker.com/', 'docker-cred') {
-            docker.build('node-api').push('0.0.3')
+            steps {
+                script {
+                    docker.withRegistry('https://hub.docker.com/', 'docker-cred') {
+                    docker.build('node-api').push('0.0.3')
+                }
             }
         }
         stage('Deploy') {
