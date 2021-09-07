@@ -1,12 +1,9 @@
 pipeline {
     agent any
+    tools {
+        docker
+    }
     stages {
-        stage('Initialize') {
-            steps {
-                def dockerHome = tool 'docker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
-        }
         stage('Build') {
             steps {
                 sh 'docker build . -t xmatheuslopes/node-api:0.0.3'
