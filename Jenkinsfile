@@ -1,12 +1,21 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            agent any
+        stage('Building image') {
             steps {
-                sh 'docker build . -t xmatheuslopes/node-api:0.0.3'
-                sh 'docker login -u xmatheuslopes -p Timaomhl1996*'
-                sh 'docker push xmatheuslopes/node-api:0.0.3'
+                script { 
+                    dockerImage = docker.build node-api
+                }
+            }
+        }
+        stage('Deploy Image') {
+            steps{
+                script {
+                    docker.withRegistry('', 'docker-cred') {
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
+                    }
+                }
             }
         }
         stage('Deploy') {
