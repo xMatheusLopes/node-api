@@ -12,6 +12,8 @@ spec:
       labels:
         app: jenkins
     spec:
+      securityContext:
+        runAsUser: 0
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts-jdk11
@@ -24,7 +26,8 @@ spec:
           mountPath: "/var/run/docker.sock"
       volumes:
       - name: jenkins-home
-        emptyDir: { }
+        hostPath:
+          path: /var/jenkins_home
       - name: dockersock
         hostPath:
           path: /var/run/docker.sock  
