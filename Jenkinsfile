@@ -6,10 +6,9 @@ pipeline {
                 dockerHome = tool 'docker'
             }
             steps {
-                sh "whoami"
-                sh "${dockerHome}/bin build . -t xmatheuslopes/node-api:0.0.3"
-                sh "${dockerHome}/bin login -u xmatheuslopes -p Timaomhl1996*"
-                sh "${dockerHome}/bin push xmatheuslopes/node-api:0.0.3"
+                sh "./${dockerHome}/bin build . -t xmatheuslopes/node-api:0.0.3"
+                sh "./${dockerHome}/bin login -u xmatheuslopes -p Timaomhl1996*"
+                sh "./${dockerHome}/bin push xmatheuslopes/node-api:0.0.3"
             }
         }
         stage('Deploy') {
