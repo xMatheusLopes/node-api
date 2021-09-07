@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                withCredentials([ string(credentialsId: 'kubernetes', variable: 'api_token')]) {
+                withCredentials([credentialsId: 'kubernetes', serverUrl: 'https://192.168.49.2:8443']) {
                     sh 'kubectl set image deployment/node-api node-api=xmatheuslopes/node-api:0.0.3'
                 }
             }
