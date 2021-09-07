@@ -1,14 +1,14 @@
 pipeline {
     agent any
-    tools {
-        docker
-    }
     stages {
         stage('Build') {
+            environment {
+                dockerHome = tool 'docker'
+            }
             steps {
-                sh 'docker build . -t xmatheuslopes/node-api:0.0.3'
-                sh 'docker login -u xmatheuslopes -p Timaomhl1996*'
-                sh 'docker push xmatheuslopes/node-api:0.0.3'
+                sh "${dockerHome}/bin build . -t xmatheuslopes/node-api:0.0.3"
+                sh "${dockerHome}/bin login -u xmatheuslopes -p Timaomhl1996*"
+                sh "${dockerHome}/bin push xmatheuslopes/node-api:0.0.3"
             }
         }
         stage('Deploy') {
