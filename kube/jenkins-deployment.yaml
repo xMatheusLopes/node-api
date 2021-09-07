@@ -15,8 +15,6 @@ spec:
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts-jdk11
-        securityContext:
-          runAsUser: 0
         ports:
         - containerPort: 8080
         volumeMounts:
