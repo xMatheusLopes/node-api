@@ -11,6 +11,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 withKubeConfig([credentialsId: 'Kubernetes', serverUrl: 'https://192.168.49.2:8443']) {
+                    sh 'ls'
+                    sh 'kubectl apply -f ./node-api-kube'
                     sh 'kubectl set image deployment/node-api node-api=xmatheuslopes/node-api:0.0.3'       
                 }
             }
