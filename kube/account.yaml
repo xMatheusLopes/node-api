@@ -11,6 +11,9 @@ metadata:
   name: jenkins
   namespace: default
 rules:
+- apiGroups: ["extensions","networking.k8s.io"]
+  resources: ["endpoints","ingresses"]
+  verbs: ["create","delete","get","list","deletecollection","patch","update","watch"]
 - apiGroups: [""]
   resources: ["pods","services"]
   verbs: ["create","delete","get","list","patch","update","watch"]
