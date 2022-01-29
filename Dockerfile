@@ -6,4 +6,4 @@ RUN npm i -g ts-node
 RUN npm i -g typescript
 RUN npm i -g nodemon
 COPY . .
-EXPOSE 8080
+EXPOSE 8081
